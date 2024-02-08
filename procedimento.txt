@@ -1,0 +1,36 @@
+1. Caricare il dataset CSV e prepararlo per l'addestramento del modello:
+    - caricare il dataset con pandas
+    - comprendere la struttura del dataset
+    - rimozione delle colonne non necessarie
+    - conversione dei tipi di dati
+    - suddivisione del dataset in set di addestramento e test set 
+    - ordinare i dati sequenziali
+
+2. Normalizzare i dati per migliorare le prestazioni del modello 
+    - valutare i dati presenti all'interno del dataset 
+    - scegliere un metodo di normalizzazione (normalizzazione min-max, normalizzazione logaritmica, standardizzazione)
+
+3. Gestire dati mancanti
+    - verificare se sono presenti dati mancanti o meno 
+    - gestire i dati mancanti con eventuali tecniche come:
+        - rimozione delle righe con dati mancanti
+        - imputazione dei valori mancanti con media o mediana dei dati oppure ancora imputazione basata su modelli 
+
+4. Creare un mode4llo RNN utilizzando Tensorflow per predice le precipitazioni
+    - scegliere l'architettura per fare predizioni (LSTM a più strati o GRU)
+    - capire bene i parametri che verranno utilizzati nel modello:
+        - numero di neuroni negli strati nascosti
+        - funzione di attivazione
+        - numero di strati 
+        - learning rate 
+        - tipologia di algoritmo per il gradiente 
+    - ottimizzazione dei parametri (possibile utilizzo della cross validation per valutare diverse configurazioni e 
+        fare tuining dei parametri)
+
+5. Addestrare il modello e valutarne le prestazioni
+    - addestrare il modello basato sul architettura scelta utilizzando i dati preparati in precedenza
+    - durante l'addestramento, monitorare il tutto con metriche come MSE o il MAE per valutare le prestazioni. 
+     (anche durante l'addestramento è possibile utilizzare cross validation)
+    - dopo l'addestramento, utilizzare il test set per vedere come il modello si comporta su dati non visti in 
+    fase di training. Si possono utilizzare le stesse metriche come MSE o MAE.
+    - Possibile utilizzo della cross validation nella fase di test su dati non visti.

@@ -78,15 +78,37 @@ def normalize_values(data_values):
 
     return values_log_normalized
 
-def plot_of_dates():
+def plot_of_dates(x_data, y_data, x_label, y_label, title, rotation, x_ticks ,y_ticks,i,j):
     """
     Crea un grafico dei dati che vengono passati come parametri con i relativi dettagi.
 
     Args:
-
+    - x_data (list): Una lista di valori per l'asse x.
+    - y_data (list): Una lista di valori per l'asse y.
+    - x_label (str): Una stringa per l'etichetta dell'asse x.
+    - y_label (str): Una stringa per l'etichetta dell'asse y.
+    - title (str): Una stringa per il titolo del grafico.
+    - rotation (int): Un intero per la rotazione delle etichette dell'asse x.
+    - x_ticks (list): Una lista di valori per le etichette dell'asse x.
+    - y_ticks (list): Una lista di valori per le etichette dell'asse y.
+    - i (int): numero di punti da saltare per l'asse x
+    - j (int): numero di punti da saltare per l'asse y
+    
     Returns: None
     """
-    pass
+
+    lib.plt.figure(figsize=(10, 6))
+    lib.plt.plot(x_data[::i], y_data[::j], marker='o', linestyle='-', color='b', alpha=0.5)
+    lib.plt.xlabel(x_label)
+    lib.plt.ylabel(y_label)
+    lib.plt.title(title)
+    lib.plt.grid(True)
+    lib.plt.xticks(rotation=rotation)
+    lib.plt.xticks(x_ticks[::10])
+    lib.plt.yticks(rotation=rotation)
+    #lib.plt.yticks(y_ticks[::10])
+    lib.plt.tight_layout()
+    lib.plt.show()
 
 
 
