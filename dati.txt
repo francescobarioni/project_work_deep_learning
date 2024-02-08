@@ -1,0 +1,16 @@
+- Forecast timestamp
+- Position
+- Forecast base
+- Temperature
+- 2 metre temperature
+- Total Precipitation
+- Relative humidity
+- Downward long-wave radiation flux
+- Downward short-wave radiation flux
+- Wind speed (gust)
+- u-component of wind (gust)
+- v-component of wind (gust)
+- 2 metre dewpoint temperature
+- Minimum temperature at 2 metres in the last 6 hours
+- Maximum temperature at 2 metres in the last 6 hours
+- Total Cloud Cover
