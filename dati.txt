@@ -1,16 +1,17 @@
-- Forecast timestamp
-- Position
-- Forecast base
-- Temperature
-- 2 metre temperature
-- Total Precipitation
-- Relative humidity
-- Downward long-wave radiation flux
-- Downward short-wave radiation flux
-- Wind speed (gust)
-- u-component of wind (gust)
-- v-component of wind (gust)
-- 2 metre dewpoint temperature
-- Minimum temperature at 2 metres in the last 6 hours
-- Maximum temperature at 2 metres in the last 6 hours
-- Total Cloud Cover
+
+1. Forecast timestamp: Questo è il timestamp che indica il momento in cui è stata fatta la previsione meteorologica.
+2. Position: Indica la posizione geografica per cui è stata effettuata la previsione meteorologica, ad esempio le coordinate latitudine e longitudine.
+3. Forecast base: È il momento di riferimento per la previsione, cioè il momento a cui si riferiscono i dati previsti.
+4. Temperature: La temperatura prevista al momento specificato.
+5. 2 metre temperature: La temperatura a 2 metri sopra il suolo prevista al momento specificato.
+6. Total Precipitation: La quantità totale di precipitazioni previste al momento specificato.
+7. Relative humidity: L'umidità relativa prevista al momento specificato.
+8. Downward long-wave radiation flux: Il flusso radiativo a onde lunghe previsto verso il basso al momento specificato.
+9. Downward short-wave radiation flux: Il flusso radiativo a onde corte previsto verso il basso al momento specificato.
+10. Wind speed (gust): La velocità del vento prevista al momento specificato, inclusa la velocità delle raffiche.
+11. u-component of wind (gust): La componente u del vento (direzione da est a ovest) prevista al momento specificato, inclusa la velocità delle raffiche.
+12. v-component of wind (gust): La componente v del vento (direzione da nord a sud) prevista al momento specificato, inclusa la velocità delle raffiche.
+13. 2 metre dewpoint temperature: La temperatura di rugiada a 2 metri sopra il suolo prevista al momento specificato.
+14. Minimum temperature at 2 metres in the last 6 hours: La temperatura minima a 2 metri sopra il suolo registrata nelle ultime 6 ore.
+15. Maximum temperature at 2 metres in the last 6 hours: La temperatura massima a 2 metri sopra il suolo registrata nelle ultime 6 ore.
+16. Total Cloud Cover: La copertura nuvolosa totale prevista al momento specificato.
