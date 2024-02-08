@@ -78,5 +78,15 @@ def normalize_values(data_values):
 
     return values_log_normalized
 
+def plot_of_dates():
+    """
+    Crea un grafico dei dati che vengono passati come parametri con i relativi dettagi.
+
+    Args:
+
+    Returns: None
+    """
+    pass
+
 
 
