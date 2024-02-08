@@ -1,3 +1,5 @@
+import librerie as lib
+
 """
 La funzione `get_column_structure` accetta un DataFrame contenente dati meteorologici 
 e restituisce una struttura dati che mappa ciascuna colonna del DataFrame al relativo tipo di dato meteorologico. 
@@ -34,3 +36,47 @@ def get_column_structure(df):
             column_structure[col_name] = df.iloc[:, i]
     
     return column_structure
+
+# Rimuove i punti da una stringa che sarebbe un numero
+def remove_points_from_vector(vector):
+    if not isinstance(vector, (list, lib.pd.Series)):
+        raise ValueError("Input must be a list or pandas Series")
+
+    if isinstance(vector, lib.pd.Series):
+        vector = vector.tolist()
+
+    result = []
+    for number in vector:
+        if isinstance(number, str):
+            number = number.replace('.', '')
+        elif isinstance(number, (int, float)):
+            number = str(number).replace('.', '')
+        else:
+            raise ValueError("Input elements must be strings or numbers")
+        result.append(number)
+    return result
+
+def normalize_values(data_values):
+    """
+    Normalizza i valori nell'intervallo 0-1 dopo aver applicato il logaritmo con l'aggiunta di un valore costante.
+
+    Args:
+    data_values (list): Una lista di valori da normalizzare.
+
+    Returns:
+    list: Una lista di valori normalizzati nell'intervallo 0-1.
+    """
+    # Aggiungi un valore costante per evitare problemi con valori zero o negativi
+    const = 1
+    values = [float(val) for val in data_values]  # Converte i valori in float
+
+    # Applica il logaritmo con il valore costante
+    values_log = lib.np.log(lib.np.array(values) + const)
+
+    # Normalizza i valori logaritmici nell'intervallo 0-1
+    values_log_normalized = (values_log - values_log.min()) / (values_log.max() - values_log.min())
+
+    return values_log_normalized
+
+
+
