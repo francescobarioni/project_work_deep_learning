@@ -1,12 +1,5 @@
 import librerie as lib
 
-"""
-La funzione `get_column_structure` accetta un DataFrame contenente dati meteorologici 
-e restituisce una struttura dati che mappa ciascuna colonna del DataFrame al relativo tipo di dato meteorologico. 
-Utilizza un dizionario di mapping predefinito per associare i nomi originali delle colonne ai nomi desiderati. 
-Successivamente, itera attraverso il dizionario di mapping per creare dinamicamente le colonne desiderate nel formato `col_nomeTipoDato`. 
-Se una colonna corrispondente al tipo di dato esiste nel DataFrame, viene inclusa nella struttura dati restituita.
-"""
 def get_column_structure(df):
     column_mapping = {
         'Forecast timestamp': 'forecasting_timestamp',
@@ -110,5 +103,34 @@ def plot_of_dates(x_data, y_data, x_label, y_label, title, rotation, x_ticks ,y_
     lib.plt.tight_layout()
     lib.plt.show()
 
+def shapiro_wilk_test(data, nome_dati):
+    # Esegui il test di Shapiro-Wilk per la normalità
+    stat, p_value = lib.stats.shapiro(data)
+    print("Test di Shapiro-Wilk:")
+    print("Statistiche test:", stat)
+    print("Valore p:", p_value)
+    if p_value > 0.05:
+        print("Non c'è sufficiente evidenza per rifiutare l'ipotesi che i dati" + str(nome_dati) + "siano distribuiti normalmente.\n")
+    else:
+        print("I dati " + str(nome_dati) +" non seguono una distribuzione normale.\n")
+
+def grafico_qqplot(data, nome_dati):
+    # Traccia il grafico Q-Q
+    lib.stats.probplot(data, dist="norm", plot=lib.plt)
+    lib.plt.title("Grafico Q-Q di " + str(nome_dati))
+    lib.plt.show()
+
+def grafico_istogramma(data, nome_dati):
+    # Traccia l'istogramma
+    lib.plt.hist(data, bins=20, density=True, alpha=0.6, color='g')
+
+    # Aggiungi la curva di densità normale per confronto
+    mu, sigma = lib.stats.norm.fit(data)
+    xmin, xmax = lib.plt.xlim()
+    x = lib.np.linspace(xmin, xmax, 100)
+    p = lib.stats.norm.pdf(x, mu, sigma)
+    lib.plt.plot(x, p, 'k', linewidth=2)
+    lib.plt.title("Distribuzione di " + str(nome_dati))
+    lib.plt.show()
 
 
