@@ -5,3 +5,4 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import sklearn as sk
 import scipy.stats as stats
+from sklearn.preprocessing import MinMaxScaler

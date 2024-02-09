@@ -106,13 +106,28 @@ def plot_of_dates(x_data, y_data, x_label, y_label, title, rotation, x_ticks ,y_
 def shapiro_wilk_test(data, nome_dati):
     # Esegui il test di Shapiro-Wilk per la normalità
     stat, p_value = lib.stats.shapiro(data)
-    print("Test di Shapiro-Wilk:")
+    print("Test di Shapiro-Wilk per " + str(nome_dati) + ":")
     print("Statistiche test:", stat)
     print("Valore p:", p_value)
     if p_value > 0.05:
         print("Non c'è sufficiente evidenza per rifiutare l'ipotesi che i dati" + str(nome_dati) + "siano distribuiti normalmente.\n")
     else:
         print("I dati " + str(nome_dati) +" non seguono una distribuzione normale.\n")
+
+def kolmogorov_smirnov_test(data, data_name):
+    # test di Kolmogorov-Smirnov per confrontare i dati con una distribuzione normale
+    # utilizzare la distribuzione normale come distribuzione di riferimento
+    ks_statistic, p_value = lib.stats.kstest(data, 'norm')
+    
+    print("Test di Kolmogorov-Smirnov per", data_name + ":")
+    print("Statistiche test:", ks_statistic)
+    print("Valore p:", p_value)
+    
+    # Confrontare il valore p con un livello di significatività predefinito (ad esempio, 0.05)
+    if p_value > 0.05:
+        print("Non c'è sufficiente evidenza per rifiutare l'ipotesi che i dati", data_name, "siano distribuiti normalmente.\n")
+    else:
+        print("I dati", data_name, "non seguono una distribuzione normale.\n")
 
 def grafico_qqplot(data, nome_dati):
     # Traccia il grafico Q-Q
