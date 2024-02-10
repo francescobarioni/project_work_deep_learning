@@ -13,10 +13,13 @@
 3. Gestire dati mancanti
     - verificare se sono presenti dati mancanti o meno 
     - gestire i dati mancanti con eventuali tecniche come:
-        - rimozione delle righe con dati mancanti
-        - imputazione dei valori mancanti con media o mediana dei dati oppure ancora imputazione basata su modelli 
+        - imputazione con media
+        - imputazione con mediana
+        - imputazione con regressione
+        - imputazione con KNN
+        - imputazione con Multivariate Imputation by Chained Equations (MICE)
 
-4. Creare un mode4llo RNN utilizzando Tensorflow per predice le precipitazioni
+4. Creare un modello RNN utilizzando Tensorflow per predice le precipitazioni
     - scegliere l'architettura per fare predizioni (LSTM a più strati o GRU)
     - capire bene i parametri che verranno utilizzati nel modello:
         - numero di neuroni negli strati nascosti

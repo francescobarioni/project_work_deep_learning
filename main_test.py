@@ -55,6 +55,7 @@ def main():
     utils.plot_normalized_data(df['2 metre temperature'], df['Normalized_2m_Temperature'], '2 Metre Temperature') # grafico per visualizzare la normalizzazione min-max
 
     # Pre-processing della precipitazione totale
+    # dai test sui dati mancanti si osserva che in questo dato sono presenti valori mancanti
 
 
 if __name__ == '__main__':
