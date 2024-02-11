@@ -178,23 +178,37 @@ def main():
                    'Normalized_Max_Temperature_6h', 'Normalized_Cloud_Cover']].values
     target = df['Normalized_Total_Precipitation'].values
 
+    # (n_samples, n_timesteps, n_features)
+    # # n_samples: numero di campioni
+    # time_steps: lunghezza della serie temporale
+    # n_features: numero di features per ogni serie temporale
+
     # definizione dei possibili valori per gli istanti temporali da testare
-    possible_time_steps = [1,11]
+    possible_time_steps = [5,10,15]
     best_time_step = None
     best_score = float('inf')
 
     # cross validation per trovare il miglior valore per un istante temporale
     for time_steps in possible_time_steps:
-        tscv = lib.TimeSeriesSplit(n_splits=5)
+        #tscv = lib.TimeSeriesSplit(n_splits=5)
+        kf = lib.KFold(n_splits=5, shuffle=True)
         scores = []
 
-        for train_index, val_index in tscv.split(features):
+        for train_index, val_index in kf.split(features):
+
+            print("Dimensioni di features:", features.shape)
+            print("Dimensioni di target:", target.shape)
+
+            if max(train_index) >= len(features) or max(val_index) >= len(features):
+                print("Gli indici generati superano la lunghezza dei dati.")
             X_train, X_val = features[train_index], features[val_index]
             y_train, y_val = target[train_index], target[val_index]
 
             # stampa le dimensioni di X_train e X_val prima del tentativo di ridimensionamento
             print("Dimensioni di X_train prima del ridimensionamento:", X_train.shape)
             print("Dimensioni di X_val prima del ridimensionamento:", X_val.shape)
+            print("Dimensioni di train_index:", train_index.shape)
+            print("Dimensioni di val_index:", val_index.shape)
 
             # reshape dei dati per adattarli al modello LSTM
             X_train = X_train.reshape((X_train.shape[0], time_steps, X_train.shape[1]))
@@ -204,11 +218,14 @@ def main():
             print("Dimensioni di X_train dopo il ridimensionamento:", X_train.shape)
             print("Dimensioni di X_val dopo il ridimensionamento:", X_val.shape)
 
+            print("Dimensioni di y_train:", y_train.shape)
+            print("Dimensioni di y_val:", y_val.shape)
+
             # costruzione del modello 
             model = utils.build_lstm_model(input_shape=(time_steps, X_train.shape[2]))
 
             # addestramento del modello
-            model.fit(X_train, y_train, epochs=10, batch_size=30, verbose=0)
+            model.fit(X_train, y_train, epochs=10, batch_size=32, verbose=0)
 
             # valutazione del modello
             y_pred = model.predict(X_val)
