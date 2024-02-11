@@ -74,3 +74,10 @@ def plot_normalized_data(original_data, normalized_data, name_data):
     lib.plt.tight_layout()
     lib.plt.show()
 
+def build_lstm_model(input_shape, units=50):
+    model = lib.Sequential()
+    model.add(lib.LSTM(units,input_shape=input_shape))
+    model.add(lib.Dense(1))
+    model.compile(optimizer='adam', loss='mean_squared_error')
+    return model
+
