@@ -81,3 +81,14 @@ def build_lstm_model(input_shape, units=50):
     model.compile(optimizer='adam', loss='mean_squared_error')
     return model
 
+def create_lstm_model(input_shape, dropout_rate=0.2, units=50, optimizer='adam'):
+    model = lib.Sequential()
+    model.add(lib.LSTM(units=units, return_sequences=True, input_shape=input_shape))
+    model.add(lib.Dropout(dropout_rate))
+    model.add(lib.LSTM(units=units, return_sequences=True))
+    model.add(lib.Dropout(dropout_rate))
+    model.add(lib.LSTM(units=units))
+    model.add(lib.Dropout(dropout_rate))
+    model.add(lib.Dense(units=1))
+    model.compile(optimizer=optimizer, loss='mean_squared_error')
+    return model

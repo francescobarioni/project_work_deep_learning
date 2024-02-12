@@ -183,63 +183,35 @@ def main():
     # time_steps: lunghezza della serie temporale
     # n_features: numero di features per ogni serie temporale
 
-    # definizione dei possibili valori per gli istanti temporali da testare
-    possible_time_steps = [5,10,15]
-    best_time_step = None
-    best_score = float('inf')
+    # Definizione degli iperparametri
+    param_dist = {
+        #'units': [50, 100, 150],
+        'batch_size': [32, 64, 128],
+        #'dropout_rate': [0.1, 0.2, 0.3],
+        'epochs': [50, 100, 150],
+        'optimizer': ['adam', 'rmsprop']
+    }
 
-    # cross validation per trovare il miglior valore per un istante temporale
-    for time_steps in possible_time_steps:
-        #tscv = lib.TimeSeriesSplit(n_splits=5)
-        kf = lib.KFold(n_splits=5, shuffle=True)
-        scores = []
+    # reshape dei dati per renderli tridimensionali per la lstm
+    features = features.reshape(features.shape[0], features.shape[1], 1)
 
-        for train_index, val_index in kf.split(features):
+    # Definizione dello spazio di ricerca
+    random_search = lib.RandomizedSearchCV(
+        estimator=lib.KerasRegressor(build_fn=utils.create_lstm_model, input_shape=(features.shape[1],1),verbose=0),
+        param_distributions=param_dist,
+        n_iter=10, # Numero di iterazioni per la random search
+        cv=lib.TimeSeriesSplit(n_splits=5).split(features),
+        verbose=2
+    )
 
-            print("Dimensioni di features:", features.shape)
-            print("Dimensioni di target:", target.shape)
+    # esecuzione della random search
+    random_search.fit(features, target)
 
-            if max(train_index) >= len(features) or max(val_index) >= len(features):
-                print("Gli indici generati superano la lunghezza dei dati.")
-            X_train, X_val = features[train_index], features[val_index]
-            y_train, y_val = target[train_index], target[val_index]
+    # identificazione delle migliori combinazioni di iperparametri
+    best_params = random_search.best_params_
+    print("Migliore combinazione di iperparametri secondo Random Search:")
+    print(best_params) 
 
-            # stampa le dimensioni di X_train e X_val prima del tentativo di ridimensionamento
-            print("Dimensioni di X_train prima del ridimensionamento:", X_train.shape)
-            print("Dimensioni di X_val prima del ridimensionamento:", X_val.shape)
-            print("Dimensioni di train_index:", train_index.shape)
-            print("Dimensioni di val_index:", val_index.shape)
-
-            # reshape dei dati per adattarli al modello LSTM
-            X_train = X_train.reshape((X_train.shape[0], time_steps, X_train.shape[1]))
-            X_val = X_val.reshape((X_val.shape[0], time_steps, X_val.shape[1]))
-
-            # stampa le dimensioni di X_train e X_val dopo il tentativo di ridimensionamento
-            print("Dimensioni di X_train dopo il ridimensionamento:", X_train.shape)
-            print("Dimensioni di X_val dopo il ridimensionamento:", X_val.shape)
-
-            print("Dimensioni di y_train:", y_train.shape)
-            print("Dimensioni di y_val:", y_val.shape)
-
-            # costruzione del modello 
-            model = utils.build_lstm_model(input_shape=(time_steps, X_train.shape[2]))
-
-            # addestramento del modello
-            model.fit(X_train, y_train, epochs=10, batch_size=32, verbose=0)
-
-            # valutazione del modello
-            y_pred = model.predict(X_val)
-            score = lib.mean_squared_error(y_val, y_pred)
-
-            # salvataggio del punteggio
-            scores.append(score)
-
-        avg_score = lib.np.mean(scores)
-        if avg_score < best_score:
-            best_score = avg_score
-            best_time_step = time_steps
-    
-    print("Il miglior istante temporale è:", best_time_step)
 
 if __name__ == '__main__':
     main()
