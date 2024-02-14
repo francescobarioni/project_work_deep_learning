@@ -3,7 +3,7 @@ import librerie as lib
 import pre_processing_data as ppd
 
 def main():
-    
+
     features, target, df = ppd.main()
 
     # (n_samples, n_timesteps, n_features)
@@ -35,7 +35,7 @@ def main():
 
     # identificazione delle migliori combinazioni di iperparametri secondo Random Search
     #best_params = random_search.best_params_
-    #print("Migliore combinazione di iperparametri secondo Random Search:")
+    #print("Migliore combinazione di iperparametri secondo Random Search (LSTM):")
     #print(best_params) 
     # Random Search + Cross Validation (k = 5):
     # {'optimizer': 'rmsprop', 'epochs': 150, 'batch_size': 32} con 50 allenamenti (17 minuti circa)
@@ -53,7 +53,7 @@ def main():
 
     # identificazione delle migliori combinazioni di iperparametri secondo Grid Search
     #best_params = grid_search.best_params_
-    #print("Migliore combinazione di iperparametri secondo Grid Search:")
+    #print("Migliore combinazione di iperparametri secondo Grid Search (LSTM):")
     #print(best_params)
     # Grid Search + Cross Validation (k = 5):
     # {'batch_size': 32, 'epochs': 150, 'optimizer': 'adam'} con 90 allenamenti (42 minuti circa)
