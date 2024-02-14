@@ -9,5 +9,5 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import TimeSeriesSplit, KFold, RandomizedSearchCV, GridSearchCV
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 from keras.models import Sequential
-from keras.layers import LSTM, Dense, Dropout
+from keras.layers import LSTM, Dense, Dropout, GaussianNoise, GRU
 from scikeras.wrappers import KerasRegressor

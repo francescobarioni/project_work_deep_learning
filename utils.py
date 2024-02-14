@@ -74,20 +74,27 @@ def plot_normalized_data(original_data, normalized_data, name_data):
     lib.plt.tight_layout()
     lib.plt.show()
 
-def build_lstm_model(input_shape, units=50):
-    model = lib.Sequential()
-    model.add(lib.LSTM(units,input_shape=input_shape))
-    model.add(lib.Dense(1)) # funzione di attivazione utilizzata lineare
-    model.compile(optimizer='adam', loss='mean_squared_error')
-    return model
-
-def create_lstm_model(input_shape, optimizer, dropout_rate=0.2, units=50):
+def create_lstm_model(input_shape, optimizer, dropout_rate=0.2, units=100, noise_level=0.01):
     model = lib.Sequential()
     model.add(lib.LSTM(units=units, return_sequences=True, input_shape=input_shape))
     model.add(lib.Dropout(dropout_rate))
+    model.add(lib.GaussianNoise(noise_level))
     model.add(lib.LSTM(units=units, return_sequences=True))
     model.add(lib.Dropout(dropout_rate))
     model.add(lib.LSTM(units=units))
+    model.add(lib.Dropout(dropout_rate))
+    model.add(lib.Dense(units=1))
+    model.compile(optimizer=optimizer, loss='mean_squared_error')
+    return model
+
+def create_gru_model(input_shape, optimizer, dropout_rate=0.2, units=100, noise_level=0.01):
+    model = lib.Sequential()
+    model.add(lib.GRU(units=units, return_sequences=True, input_shape=input_shape))
+    model.add(lib.Dropout(dropout_rate))
+    model.add(lib.GaussianNoise(noise_level))
+    model.add(lib.GRU(units=units, return_sequences=True))
+    model.add(lib.Dropout(dropout_rate))
+    model.add(lib.GRU(units=units))
     model.add(lib.Dropout(dropout_rate))
     model.add(lib.Dense(units=1))
     model.compile(optimizer=optimizer, loss='mean_squared_error')
