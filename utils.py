@@ -74,7 +74,7 @@ def plot_normalized_data(original_data, normalized_data, name_data):
     lib.plt.tight_layout()
     lib.plt.show()
 
-def create_lstm_model(input_shape, optimizer, dropout_rate=0.2, units=100, noise_level=0.01):
+def create_lstm_model(input_shape, optimizer='adam', dropout_rate=0.2, units=100, noise_level=0.01):
     model = lib.Sequential()
     model.add(lib.LSTM(units=units, return_sequences=True, input_shape=input_shape))
     model.add(lib.Dropout(dropout_rate))
@@ -87,7 +87,7 @@ def create_lstm_model(input_shape, optimizer, dropout_rate=0.2, units=100, noise
     model.compile(optimizer=optimizer, loss='mean_squared_error')
     return model
 
-def create_gru_model(input_shape, optimizer, dropout_rate=0.2, units=100, noise_level=0.01):
+def create_gru_model(input_shape, optimizer='adam', dropout_rate=0.2, units=100, noise_level=0.01):
     model = lib.Sequential()
     model.add(lib.GRU(units=units, return_sequences=True, input_shape=input_shape))
     model.add(lib.Dropout(dropout_rate))

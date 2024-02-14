@@ -22,7 +22,7 @@ def main():
         lib.plt.ylabel('Colonna', fontsize=12)
         lib.plt.title('Percentuale di dati mancanti per colonna', fontsize=16)
         lib.plt.gca().invert_yaxis()  # Inverto l'ordine delle colonne
-        #lib.plt.show()
+        lib.plt.show()
     elif missing_values.sum() == 0: # se non ci sono valori mancanti
         print('Non ci sono valori mancanti nel dataset\n')
 
@@ -46,7 +46,7 @@ def main():
     min_temp = df['Temperature'].min()
     max_temp = df['Temperature'].max()
     df['Normalized_Temperature'] = (df['Temperature'] - min_temp) / (max_temp - min_temp)
-    #utils.plot_normalized_data(df['Temperature'], df['Normalized_Temperature'], 'Temperature') # grafico per visualizzare la normalizzazione min-max
+    utils.plot_normalized_data(df['Temperature'], df['Normalized_Temperature'], 'Temperature') # grafico per visualizzare la normalizzazione min-max
 
     # Pre-processing della "2 metre temperature"
     # non ci sono dati mancanti
@@ -57,7 +57,7 @@ def main():
     min_temp_2m = df['2 metre temperature'].min()
     max_temp_2m = df['2 metre temperature'].max()
     df['Normalized_2m_Temperature'] = (df['2 metre temperature'] - min_temp_2m) / (max_temp_2m - min_temp_2m)
-    #utils.plot_normalized_data(df['2 metre temperature'], df['Normalized_2m_Temperature'], '2 Metre Temperature') # grafico per visualizzare la normalizzazione min-max
+    utils.plot_normalized_data(df['2 metre temperature'], df['Normalized_2m_Temperature'], '2 Metre Temperature') # grafico per visualizzare la normalizzazione min-max
 
     # Pre-processing della "Total Precipitation"
     # dai test sui dati mancanti si osserva che in questo dato sono presenti valori mancanti
@@ -71,7 +71,7 @@ def main():
     min_precipitation = df['Total Precipitation'].min()
     max_precipitation = df['Total Precipitation'].max()
     df['Normalized_Total_Precipitation'] = (df['Total Precipitation'] - min_precipitation) / (max_precipitation - min_precipitation)
-    #utils.plot_normalized_data(df['Total Precipitation'], df['Normalized_Total_Precipitation'], 'Total Precipitation') # grafico per visualizzare la normalizzazione min-max
+    utils.plot_normalized_data(df['Total Precipitation'], df['Normalized_Total_Precipitation'], 'Total Precipitation') # grafico per visualizzare la normalizzazione min-max
 
     # Pre-processing della "Relative humidity"
     # non ci sono dati mancanti
@@ -82,7 +82,7 @@ def main():
     min_humidity = df['Relative humidity'].min()
     max_humidity = df['Relative humidity'].max()
     df['Normalized_Relative_Humidity'] = (df['Relative humidity'] - min_humidity) / (max_humidity - min_humidity)
-    #utils.plot_normalized_data(df['Relative humidity'], df['Normalized_Relative_Humidity'], 'Relative Humidity') # grafico per visualizzare la normalizzazione min-max
+    utils.plot_normalized_data(df['Relative humidity'], df['Normalized_Relative_Humidity'], 'Relative Humidity') # grafico per visualizzare la normalizzazione min-max
 
     # Pre-processing del "Wind speed (gust)"
     # ci sono valori mancanti
@@ -96,7 +96,7 @@ def main():
     min_wind_speed = df['Wind speed (gust)'].min()
     max_wind_speed = df['Wind speed (gust)'].max()
     df['Normalized_Wind_Speed'] = (df['Wind speed (gust)'] - min_wind_speed) / (max_wind_speed - min_wind_speed)
-    #utils.plot_normalized_data(df['Wind speed (gust)'], df['Normalized_Wind_Speed'], 'Wind Speed') # grafico per visualizzare la normalizzazione min-max
+    utils.plot_normalized_data(df['Wind speed (gust)'], df['Normalized_Wind_Speed'], 'Wind Speed') # grafico per visualizzare la normalizzazione min-max
 
     # Pre-processing del "u-component of wind (gust)"
     # ci sono valori mancanti
@@ -108,7 +108,7 @@ def main():
     min_u_wind = df['u-component of wind (gust)'].min()
     max_u_wind = df['u-component of wind (gust)'].max()
     df['Normalized_U_Wind'] = (df['u-component of wind (gust)'] - min_u_wind) / (max_u_wind - min_u_wind)
-    #utils.plot_normalized_data(df['u-component of wind (gust)'], df['Normalized_U_Wind'], 'U Wind') # grafico per visualizzare la normalizzazione min-max
+    utils.plot_normalized_data(df['u-component of wind (gust)'], df['Normalized_U_Wind'], 'U Wind') # grafico per visualizzare la normalizzazione min-max
 
     # Pre-processing del "v-component of wind (gust)"
     # ci sono valori mancanti
@@ -120,7 +120,7 @@ def main():
     min_v_wind = df['v-component of wind (gust)'].min()
     max_v_wind = df['v-component of wind (gust)'].max()
     df['Normalized_V_Wind'] = (df['v-component of wind (gust)'] - min_v_wind) / (max_v_wind - min_v_wind)
-    #utils.plot_normalized_data(df['v-component of wind (gust)'], df['Normalized_V_Wind'], 'V Wind') # grafico per visualizzare la normalizzazione min-max
+    utils.plot_normalized_data(df['v-component of wind (gust)'], df['Normalized_V_Wind'], 'V Wind') # grafico per visualizzare la normalizzazione min-max
 
     # Pre-processing del "2 metre dewpoint temperature"
     # non ci sono dati mancanti
@@ -131,7 +131,7 @@ def main():
     min_dewpoint_temp = df['2 metre dewpoint temperature'].min()
     max_dewpoint_temp = df['2 metre dewpoint temperature'].max()
     df['Normalized_Dewpoint_Temperature'] = (df['2 metre dewpoint temperature'] - min_dewpoint_temp) / (max_dewpoint_temp - min_dewpoint_temp)
-    #utils.plot_normalized_data(df['2 metre dewpoint temperature'], df['Normalized_Dewpoint_Temperature'], 'Dewpoint Temperature') # grafico per visualizzare la normalizzazione min-max
+    utils.plot_normalized_data(df['2 metre dewpoint temperature'], df['Normalized_Dewpoint_Temperature'], 'Dewpoint Temperature') # grafico per visualizzare la normalizzazione min-max
     
     # Pre-processing del "Total Cloud Cover"
     # non ci sono valori mancanti
@@ -142,7 +142,7 @@ def main():
     min_cloud_cover = df['Total Cloud Cover'].min()
     max_cloud_cover = df['Total Cloud Cover'].max()
     df['Normalized_Cloud_Cover'] = (df['Total Cloud Cover'] - min_cloud_cover) / (max_cloud_cover - min_cloud_cover)
-    #utils.plot_normalized_data(df['Total Cloud Cover'], df['Normalized_Cloud_Cover'], 'Total Cloud Cover') # grafico per visualizzare la normalizzazione min-max
+    utils.plot_normalized_data(df['Total Cloud Cover'], df['Normalized_Cloud_Cover'], 'Total Cloud Cover') # grafico per visualizzare la normalizzazione min-max
 
     # Creazione degli array delle features e del target
     features = df[['Normalized_Temperature', 'Normalized_2m_Temperature', 'Normalized_Total_Precipitation', 
