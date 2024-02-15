@@ -30,6 +30,7 @@ def main():
     # non ci sono dati mancanti
     df['Forecast timestamp'] = lib.pd.to_datetime(df['Forecast timestamp'])
     df.sort_values(by='Forecast timestamp', inplace=True)
+    df.set_index('Forecast timestamp', inplace=True)
 
     # Pre-processing della "Position"
     # non ci sono dati mancanti

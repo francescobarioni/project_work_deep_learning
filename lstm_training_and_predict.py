@@ -182,3 +182,5 @@ def main():
 
     # Grafico delle previsioni e delle metriche di valutazione
     plot_lstm_predictions(predicted_precipitation_random_search, predicted_precipitation_grid_search, mse_random_search, rmse_random_search, mae_random_search, mse_grid_search, rmse_grid_search, mae_grid_search)
+    
+    return mse_random_search, rmse_random_search, mae_random_search, mse_grid_search, rmse_grid_search, mae_grid_search

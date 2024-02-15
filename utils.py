@@ -99,3 +99,40 @@ def create_gru_model(input_shape, optimizer='adam', dropout_rate=0.2, units=100,
     model.add(lib.Dense(units=1))
     model.compile(optimizer=optimizer, loss='mean_squared_error')
     return model
+
+def comparte_lstm_and_lstm_model(lstm_mse_random_search, lstm_rmse_random_search, lstm_mae_random_search, 
+                            lstm_mse_grid_search, lstm_rmse_grid_search, lstm_mae_grid_search, 
+                            gru_mse_random_search, gru_rmse_random_search, gru_mae_random_search, 
+                            gru_mse_grid_search, gru_rmse_grid_search, gru_mae_grid_search):
+    
+    # Organizza i dati in un dizionario
+    data = {
+        'LSTM Random Search': {'MSE': lstm_mse_random_search, 'RMSE': lstm_rmse_random_search, 'MAE': lstm_mae_random_search},
+        'LSTM Grid Search': {'MSE': lstm_mse_grid_search, 'RMSE': lstm_rmse_grid_search, 'MAE': lstm_mae_grid_search},
+        'GRU Random Search': {'MSE': gru_mse_random_search, 'RMSE': gru_rmse_random_search, 'MAE': gru_mae_random_search},
+        'GRU Grid Search': {'MSE': gru_mse_grid_search, 'RMSE': gru_rmse_grid_search, 'MAE': gru_mae_grid_search}
+    }
+
+    # Calcola le medie per ogni combinazione di modello e ricerca
+    averages = {}
+    for model, metrics in data.items():
+        averages[model] = {
+            'MSE': lib.np.mean(metrics['MSE']),
+            'RMSE': lib.np.mean(metrics['RMSE']),
+            'MAE': lib.np.mean(metrics['MAE'])
+        }
+
+    # Plotting
+    models = list(averages.keys())
+    metrics = list(averages[models[0]].keys())
+
+    fig, axes = lib.plt.subplots(nrows=len(metrics), ncols=1, figsize=(10, 8))
+
+    for i, metric in enumerate(metrics):
+        values = [averages[model][metric] for model in models]
+        axes[i].bar(models, values, color=['blue', 'orange', 'green', 'red'])
+        axes[i].set_ylabel(metric)
+        axes[i].set_ylim(0, max(values) * 1.2)
+
+    lib.plt.tight_layout()
+    lib.plt.show()
