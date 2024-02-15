@@ -74,6 +74,18 @@ def plot_normalized_data(original_data, normalized_data, name_data):
     lib.plt.tight_layout()
     lib.plt.show()
 
+    # Architettura LSTM e GRU:
+    # - INPUT LAYER 
+    # - LSTM layer 1 (or GRU layer 1) con 100 units
+    # - Dropout layer 1 con rate 0.2
+    # - GaussianNoise layer con noise level 0.01
+    # - LSTM layer 2 (or GRU layer 2) con 100 units
+    # - Dropout layer 2 con rate 0.2
+    # - LSTM layer 3 (or GRU layer 3) con 100 units
+    # - Dropout layer 3 con rate 0.2
+    # - OUTPUT LAYER con funzione di attivazione lineare
+    # fase di compilazione del modello con relativo ottimizzatore e funzione di perdita
+
 def create_lstm_model(input_shape, optimizer='adam', dropout_rate=0.2, units=100, noise_level=0.01):
     model = lib.Sequential()
     model.add(lib.LSTM(units=units, return_sequences=True, input_shape=input_shape))
